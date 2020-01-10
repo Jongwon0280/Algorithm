@@ -9,7 +9,15 @@ typedef struct List {
 	int n;
 	node * array;
 }list;
-int bin_search(list * List, int n, int key) {
+
+list * create() {
+	list * plink = NULL;
+	plink = (list *)malloc(sizeof(list));
+	memset(plink, 0, sizeof(list));
+	plink->array = (Node *)malloc(sizeof(Node) * 10);
+	return plink;
+}
+int bin_search_ascend(list * List, int n, int key) {
 	int low = 1;
 	int high = n;
 	int mid;
@@ -25,12 +33,28 @@ int bin_search(list * List, int n, int key) {
 	return loc;
 	
 }
+int bin_search_descend(list * List, int n, int key) {
+	int low = 1;
+	int high = n;
+	int mid;
+	int loc = 0;
+	while (loc == 0 && low <= high) {
+		mid = (low + high) / 2;
+		if (List->array[mid].num == key) loc = mid;
+		else if (List->array[mid].num < key) high = mid - 1;
+		else low = mid + 1;
+	}
+	if (loc == 0)
+		loc = low;
+	return loc;
+
+}
 void asecending_insert_sort(list * List,int n) {
 	int j;
 	int key;
 	for (int i = 2; i <= n; i++) {
 		 key = List->array[i].num;
-		 int loc =bin_search(List, i-1, key);
+		 int loc =bin_search_ascend(List, i-1, key);
 		 for(int j=i;j>loc;j--){
 			 List->array[j].num = List->array[j - 1].num;
 		}
@@ -39,28 +63,18 @@ void asecending_insert_sort(list * List,int n) {
 }
 void descending_insert_sort(list * List, int n) {
 	int j;
-	for (int i = 1; i <= n - 1; i++) {
-		j = i - 1;
-		int key = List->array[i].num;
-		while (j >= 0) {
-			if (List->array[j].num < key) {
-				List->array[j+1].num = List->array[j].num;
-				j--;
-			}
-			else {
-				break;
-			}
+	int key;
+	for (int i = 2; i <= n; i++) {
+		key = List->array[i].num;
+		int loc = bin_search_descend(List, i - 1, key);
+		for (int j = i; j>loc; j--) {
+			List->array[j].num = List->array[j - 1].num;
 		}
-		List->array[j + 1].num = key;
+		List->array[loc].num = key;
+	
 	}
 }
-list * create() {
-	list * plink = NULL;
-	plink = (list *)malloc(sizeof(list));
-	memset(plink, 0, sizeof(list));
-	plink->array = (Node *)malloc(sizeof(Node) * 10);
-	return plink;
-}
+
 void print(list * List) {
 	for (int i = 1; i <= 6; i++) {
 		printf("%d ", List->array[i].num);
@@ -78,8 +92,8 @@ int main()
 	preturn->array[6].num= 6;
 	asecending_insert_sort(preturn, 6);
 	print(preturn);
-	//descending_insert_sort(preturn, 6);
-	//print(preturn);
+	descending_insert_sort(preturn, 6);
+	print(preturn);
 	system("pause");
 	return 0;
 }
