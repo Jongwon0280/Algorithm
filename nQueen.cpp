@@ -1,7 +1,7 @@
 #include<stdio.h>
 int R[15],  L[15], U[15],  count, n;
 int map[100][100];
-void queen(int y, int x,int n,int R[],int L[],int U[]) { // 바둑판 사이즈 10x10
+void queen(int y, int x,int n,int R[],int L[],int U[]) { 
 	if (R[y + x] || L[y - x + n] || U[x]) {
 		return;
 	}
