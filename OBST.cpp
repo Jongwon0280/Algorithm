@@ -7,7 +7,7 @@ int P[5] = { 0, 3,3,1,1 };
 int Q[10] = { 2,3,1,1,1 };
 void order(int i, int j, int l) {
 	if (i == j) {
-		printf("À§Ä¡ : %d, °ª : %d ", l,i);
+		printf("ìœ„ì¹˜ : %d, ê°’ : %d ", l,i);
 		return;
 	}
 	if (i > j)return;
@@ -15,7 +15,7 @@ void order(int i, int j, int l) {
 		int k = R[i][j];
 		
 		order(i, k - 1,2*l);
-		printf("À§Ä¡ : %d, °ª : %d ",l, k);
+		printf("ìœ„ì¹˜ : %d, ê°’ : %d ",l, k);
 		order(k+1, j,2*l+1);
 
 	}
@@ -25,7 +25,7 @@ int knuth_min(int A[][MAX_SIZE], int R[][MAX_SIZE], int i, int j) {
 	int min_index;
 	for (int k = i+1; k <= j; k++) {
 		if (min_val > A[i][k - 1] + A[k][j]) {
-			if (min_val == A[i][k - 1] + A[k][j] && min_index > k)// min_val°ªÀÌ °°Àº°æ¿ì, 
+			if (min_val == A[i][k - 1] + A[k][j] && min_index > k)// min_valê°’ì´ ê°™ì€ê²½ìš°, 
 			{
 				min_index = k;
 			}
