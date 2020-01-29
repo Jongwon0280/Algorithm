@@ -89,6 +89,7 @@ void obst(int P[], int Q[], int A[][MAX_SIZE], int R[][MAX_SIZE], int W[][MAX_SI
 	}
 
 	order(1, 4,1);
+	
 }
 int main() {
 
