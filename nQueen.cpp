@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<Windows.h>
+
 int R[15], L[15], U[15], count, n;
 int map[100][100];
 void queen(int y, int x, int n, int R[], int L[], int U[]) {
